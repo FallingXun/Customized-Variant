@@ -20,7 +20,7 @@ namespace CustomizedVariant
         /// <summary>
         /// 临时变体后缀
         /// </summary>
-        public const string Postfix_Temp = "_Temp";
+        public const string Postfix_Temp = "_CustomizedTemp";
         /// <summary>
         /// 预制体文件扩展名
         /// </summary>
@@ -404,7 +404,7 @@ namespace CustomizedVariant
             }
             else
             {
-                return path.Replace(Extension_Prefab, PostfixWithExtension_Customized);
+                return path.Replace(Extension_Prefab, PostfixWithExtension_Temp);
             }
         }
     }
