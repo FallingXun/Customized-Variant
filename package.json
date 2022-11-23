@@ -1,0 +1,15 @@
+{
+  "name": "com.fallingxun.customizedvariant",
+  "version": "1.0.0",
+  "displayName": "Customized Variant",
+  "description": "定制化变体工具",
+  "unity": "2020.3",
+  "dependencies": {
+    
+ },
+ "keywords": [
+    "customizedvariant",
+    "customized",
+    "variant"
+  ]
+}
