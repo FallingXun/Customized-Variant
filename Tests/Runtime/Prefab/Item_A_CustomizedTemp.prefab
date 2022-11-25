@@ -1,40 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4171248666004449393
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7020523207823887875}
-  m_Layer: 5
-  m_Name: AddRootRed
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &7020523207823887875
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171248666004449393}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4167861649165380008}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &6578970859032869775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45,34 +10,6 @@ PrefabInstance:
     - target: {fileID: 1683525887597054503, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
       propertyPath: m_Name
       value: Item_A_CustomizedTemp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3591629020633905535, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_Name
-      value: RedPoint_Portrait
-      objectReference: {fileID: 0}
-    - target: {fileID: 3881609036792031432, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_Text
-      value: 33
-      objectReference: {fileID: 0}
-    - target: {fileID: 3881609036792031432, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3881609036792031432, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3881609036792031432, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 3881609036792031432, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3881609036792031432, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_FontData.m_HorizontalOverflow
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5368253871834519455, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
       propertyPath: m_Pivot.x
@@ -158,79 +95,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6369116841553773433, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369116841553773433, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.22516632
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369116841553773433, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369116841553773433, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105003688136348199, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105003688136348199, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105003688136348199, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105003688136348199, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7430709022459313633, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7430709022459313633, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7430709022459313633, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7430709022459313633, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
---- !u!224 &4167861649165380008 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7105003688136348199, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-  m_PrefabInstance: {fileID: 6578970859032869775}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5171306925284494550 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2056208911103784793, guid: be533fc049ae606499473e3bd3441b6a, type: 3}
-  m_PrefabInstance: {fileID: 6578970859032869775}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4986435422273490824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5171306925284494550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88fc1c369ba2ce14badf3cdb8e722eec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Go: {fileID: 4171248666004449393}
-  m_Image: {fileID: 0}
-  m_Text: {fileID: 0}
-  m_Rtf: {fileID: 0}

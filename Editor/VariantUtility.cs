@@ -14,25 +14,50 @@ namespace CustomizedVariant
     public class VariantUtility
     {
         /// <summary>
+        /// 默认变体定制化标签名
+        /// </summary>
+        private const string DEFAULT_TAG = "Customized";
+
+        /// <summary>
+        /// 定制化变体标签名
+        /// </summary>
+        private static string m_VariantTag = DEFAULT_TAG;
+        /// <summary>
         /// 定制化变体后缀
         /// </summary>
-        public const string Postfix_Customized = "_Customized";
+        public readonly static string Postfix_Customized = "_" + m_VariantTag;
         /// <summary>
         /// 临时变体后缀
         /// </summary>
-        public const string Postfix_Temp = "_CustomizedTemp";
+        public readonly static string Postfix_Temp = "_" + m_VariantTag + "Temp";
         /// <summary>
         /// 预制体文件扩展名
         /// </summary>
-        public const string Extension_Prefab = ".prefab";
+        public readonly static string Extension_Prefab = ".prefab";
         /// <summary>
         /// 定制化变体后缀带扩展名
         /// </summary>
-        public static string PostfixWithExtension_Customized = Postfix_Customized + Extension_Prefab;
+        public readonly static string PostfixWithExtension_Customized = Postfix_Customized + Extension_Prefab;
         /// <summary>
         /// 临时变体后缀带扩展名
         /// </summary>
-        public static string PostfixWithExtension_Temp = Postfix_Temp + Extension_Prefab;
+        public readonly static string PostfixWithExtension_Temp = Postfix_Temp + Extension_Prefab;
+
+        /// <summary>
+        /// 设置变体标签名，变体名后缀为 "_" + tag 
+        /// </summary>
+        /// <param name="tag"></param>
+        public static void SetVariantTag(string tag)
+        {
+            if (string.IsNullOrWhiteSpace(tag))
+            {
+                m_VariantTag = DEFAULT_TAG;
+            }
+            else
+            {
+                m_VariantTag = tag;
+            }
+        }
 
         /// <summary>
         /// 创建变体
@@ -131,7 +156,7 @@ namespace CustomizedVariant
             {
                 var pref_child_instance = stack_instance.Pop();
                 var path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(pref_child_instance);
-                var customized = AssetDatabase.LoadAssetAtPath<GameObject>(path.Replace(".prefab", Postfix_Customized + ".prefab"));
+                var customized = AssetDatabase.LoadAssetAtPath<GameObject>(GetCustomizedPath(path));
                 if (customized != null)
                 {
                     // 应用新增的GameObject节点，只能在每个子节点最后的位置添加（先应用新增，保证后续Component能引用到）
@@ -195,7 +220,7 @@ namespace CustomizedVariant
             {
                 var pref_child = stack_pref.Pop();
                 var path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(pref_child);
-                var customized = AssetDatabase.LoadAssetAtPath<GameObject>(path.Replace(".prefab", Postfix_Customized + ".prefab"));
+                var customized = AssetDatabase.LoadAssetAtPath<GameObject>(GetCustomizedPath(path));
                 if (customized != null)
                 {
                     // 应用修改的属性
@@ -248,14 +273,14 @@ namespace CustomizedVariant
         /// <param name="path_customized"></param>
         public static void RevertTempModifications(string path_customized)
         {
-            var pref_temp = AssetDatabase.LoadAssetAtPath<GameObject>(path_customized.Replace(Postfix_Customized, Postfix_Temp));
+            var pref_temp = AssetDatabase.LoadAssetAtPath<GameObject>(GetTempPath(path_customized));
             if (pref_temp == null)
             {
                 return;
             }
             PrefabUtility.RevertPrefabInstance(pref_temp, InteractionMode.UserAction);
             AssetDatabase.SaveAssets();
-            var pref_origin = AssetDatabase.LoadAssetAtPath<GameObject>(path_customized.Replace(Postfix_Customized, ""));
+            var pref_origin = AssetDatabase.LoadAssetAtPath<GameObject>(GetOriginPath(path_customized));
             if (pref_origin.GetComponent<Canvas>() != null)
             {
                 var rtf_origin = pref_origin.GetComponent<RectTransform>();
@@ -408,7 +433,7 @@ namespace CustomizedVariant
             {
                 return path;
             }
-            if (path.Contains(PostfixWithExtension_Temp))
+            if (path.EndsWith(PostfixWithExtension_Temp))
             {
                 return path.Replace(PostfixWithExtension_Temp, PostfixWithExtension_Customized);
             }
@@ -429,13 +454,34 @@ namespace CustomizedVariant
             {
                 return path;
             }
-            if (path.Contains(PostfixWithExtension_Customized))
+            if (path.EndsWith(PostfixWithExtension_Customized))
             {
                 return path.Replace(PostfixWithExtension_Customized, PostfixWithExtension_Temp);
             }
             else
             {
                 return path.Replace(Extension_Prefab, PostfixWithExtension_Temp);
+            }
+        }
+
+        /// <summary>
+        /// 获取源预制体路径
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string GetOriginPath(string path)
+        {
+            if (path.EndsWith(PostfixWithExtension_Temp))
+            {
+                return path.Replace(PostfixWithExtension_Temp, Extension_Prefab);
+            }
+            if (path.EndsWith(PostfixWithExtension_Customized))
+            {
+                return path.Replace(PostfixWithExtension_Customized, Extension_Prefab);
+            }
+            else
+            {
+                return path;
             }
         }
     }
