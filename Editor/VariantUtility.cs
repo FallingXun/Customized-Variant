@@ -73,7 +73,6 @@ namespace CustomizedVariant
         /// <param name="path_customized">定制预制体变体路径</param>
         public static void ApplyTempModifications(string path_customized)
         {
-            RevertTempModifications(path_customized);
             var pref_temp = AssetDatabase.LoadAssetAtPath<GameObject>(GetTempPath(path_customized));
             if (pref_temp == null)
             {
@@ -270,6 +269,38 @@ namespace CustomizedVariant
                 }
             }
 
+        }
+
+        /// <summary>
+        /// 修正customized预制体信息
+        /// </summary>
+        /// <param name="path_customized"></param>
+        public static void CorrectCustomizedModifications(string path_customized)
+        {
+            var pref_customized = AssetDatabase.LoadAssetAtPath<GameObject>(path_customized);
+            if (pref_customized == null)
+            {
+                return;
+            }
+            // 修正 customized 预制体新增的 GameObject ，排在子节点 customized 新增的 GameObject 后面
+            var addedGameObjects = PrefabUtility.GetAddedGameObjects(pref_customized);
+            foreach (var addedGameObject in addedGameObjects)
+            {
+                addedGameObject.instanceGameObject.transform.SetAsLastSibling();
+            }
+            EditorUtility.SetDirty(pref_customized);
+            AssetDatabase.SaveAssets();
+
+            // 如果当前打开着预制体，则将数据更新到当前预制体中
+            var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+            if (prefabStage != null && prefabStage.assetPath.Equals(path_customized))
+            {
+                var addedGameObjects_stage = PrefabUtility.GetAddedGameObjects(prefabStage.prefabContentsRoot);
+                for (int i = addedGameObjects_stage.Count - 1; i >= 0; i--)
+                {
+                    addedGameObjects_stage[i].instanceGameObject.transform.SetSiblingIndex(addedGameObjects[i].instanceGameObject.transform.GetSiblingIndex());
+                }
+            }
         }
 
         /// <summary>
