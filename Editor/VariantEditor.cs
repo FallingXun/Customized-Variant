@@ -103,10 +103,19 @@ namespace CustomizedVariant
                 Debug.Log("生成定制变体成功 : " + path_customized);
             }
         }
+
+        [MenuItem("Assets/定制化变体/重置定制预制体变体名Tag")]
+        public static void ResetCustomizedVariantTag()
+        {
+            VariantUtility.VariantTag = "";
+            PrintCustomizedVariantTag();
+        }
+
+        [MenuItem("Assets/定制化变体/输出定制预制体变体名Tag")]
+        public static void PrintCustomizedVariantTag()
+        {
+            Debug.LogFormat("当前预制体变体名Tag为 ： {0}", VariantUtility.VariantTag);
+        }
         #endregion
-
-
-
-
     }
 }

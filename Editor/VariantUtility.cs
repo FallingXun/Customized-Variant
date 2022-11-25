@@ -16,48 +16,85 @@ namespace CustomizedVariant
         /// <summary>
         /// 默认变体定制化标签名
         /// </summary>
-        private const string DEFAULT_TAG = "Customized";
+        private const string Default_Tag = "Customized";
+        /// <summary>
+        /// 预制体文件扩展名
+        /// </summary>
+        public const string Extension_Prefab = ".prefab";
 
         /// <summary>
         /// 定制化变体标签名
         /// </summary>
-        private static string m_VariantTag = DEFAULT_TAG;
+        private static string m_VariantTag = Default_Tag;
+
+
+        /// <summary>
+        /// 变体标签名，变体名后缀为 "_" + VariantTag 
+        /// </summary>
+        /// <param name="tag"></param>
+        public static string VariantTag
+        {
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    m_VariantTag = Default_Tag;
+                }
+                else
+                {
+                    m_VariantTag = value;
+                }
+            }
+            get
+            {
+                return m_VariantTag;
+            }
+        }
+
         /// <summary>
         /// 定制化变体后缀
         /// </summary>
-        public readonly static string Postfix_Customized = "_" + m_VariantTag;
+        public static string Postfix_Customized
+        {
+            get
+            {
+                return string.Format("_{0}", VariantTag);
+            }
+        }
+
         /// <summary>
         /// 临时变体后缀
         /// </summary>
-        public readonly static string Postfix_Temp = "_" + m_VariantTag + "Temp";
-        /// <summary>
-        /// 预制体文件扩展名
-        /// </summary>
-        public readonly static string Extension_Prefab = ".prefab";
+        public static string Postfix_Temp
+        {
+            get
+            {
+                return string.Format("_{0}Temp", VariantTag);
+            }
+        }
+
         /// <summary>
         /// 定制化变体后缀带扩展名
         /// </summary>
-        public readonly static string PostfixWithExtension_Customized = Postfix_Customized + Extension_Prefab;
+        public static string PostfixWithExtension_Customized
+        {
+            get
+            {
+                return Postfix_Customized + Extension_Prefab;
+            }
+        }
+
         /// <summary>
         /// 临时变体后缀带扩展名
         /// </summary>
-        public readonly static string PostfixWithExtension_Temp = Postfix_Temp + Extension_Prefab;
-
-        /// <summary>
-        /// 设置变体标签名，变体名后缀为 "_" + tag 
-        /// </summary>
-        /// <param name="tag"></param>
-        public static void SetVariantTag(string tag)
+        public static string PostfixWithExtension_Temp
         {
-            if (string.IsNullOrWhiteSpace(tag))
+            get
             {
-                m_VariantTag = DEFAULT_TAG;
-            }
-            else
-            {
-                m_VariantTag = tag;
+                return Postfix_Temp + Extension_Prefab;
             }
         }
+
 
         /// <summary>
         /// 创建变体
