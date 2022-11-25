@@ -113,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9138794143174981754, guid: 293ea90dc2940f042871bcd68be382e2, type: 3}
       propertyPath: m_Name
-      value: Panel_A_Portrait
+      value: Panel_A_Customized
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 293ea90dc2940f042871bcd68be382e2, type: 3}
