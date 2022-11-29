@@ -75,6 +75,11 @@
 ![Compare_Item_A.png](/img/Unity/CustomizedVariant/Compare_Item_A.png?raw=true)
 ![Compare_Panel_A.png](/img/Unity/CustomizedVariant/Compare_Panel_A.png?raw=true)
 
+## 应用场景
+- 定制化变体，可以用于开发中需要同时存在多套差异化预制体的情况，如：
+    - 多语言版本差异化
+    - 横竖屏版本差异化
+    - ...
 
 ## 项目地址
 [定制化变体 Customized-Variant](https://github.com/FallingXun/Customized-Variant.git)
