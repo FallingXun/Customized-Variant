@@ -13,19 +13,11 @@ namespace CustomizedVariant
 {
     public class VariantUtility
     {
-        /// <summary>
-        /// 默认变体定制化标签名
-        /// </summary>
-        private const string Default_Tag = "Customized";
+
         /// <summary>
         /// 预制体文件扩展名
         /// </summary>
         public const string Extension_Prefab = ".prefab";
-
-        /// <summary>
-        /// 定制化变体标签名
-        /// </summary>
-        private static string m_VariantTag = Default_Tag;
 
 
         /// <summary>
@@ -34,21 +26,8 @@ namespace CustomizedVariant
         /// <param name="tag"></param>
         public static string VariantTag
         {
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    m_VariantTag = Default_Tag;
-                }
-                else
-                {
-                    m_VariantTag = value;
-                }
-            }
-            get
-            {
-                return m_VariantTag;
-            }
+            private set;
+            get;
         }
 
         /// <summary>
@@ -95,6 +74,57 @@ namespace CustomizedVariant
             }
         }
 
+        /// <summary>
+        /// 是否有效
+        /// </summary>
+        /// <returns></returns>
+        private static bool IsVaild()
+        {
+            if (string.IsNullOrWhiteSpace(VariantTag))
+            {
+                Debug.LogError("未设置定制化变体Tag，请先设置！");
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 设置定制预制体名Tag
+        /// </summary>
+        /// <param name="tag"></param>
+        public static void SetCustomizedVariantTag(string tag)
+        {
+            VariantTag = tag;
+            PrintCustomizedVariantTag();
+        }
+
+        /// <summary>
+        /// 输出定制预制体变体名Tag
+        /// </summary>
+        public static void PrintCustomizedVariantTag()
+        {
+            Debug.LogFormat("当前预制体变体名Tag为 ： {0}", VariantTag);
+        }
+
+        /// <summary>
+        /// 创建定制预制体变体
+        /// </summary>
+        public static void CreateCustomizedVariantPrefab(GameObject go)
+        {
+            if (IsVaild() == false)
+            {
+                return;
+            }
+            var path_src = AssetDatabase.GetAssetPath(go);
+            // 创建temp变体，用于应用子嵌套预设的变体修改信息
+            var path_temp = GetTempPath(path_src);
+            var variant_temp = CreateVariant(go, path_temp);
+            // 创建customized变体，用于保存此预设的变体修改信息
+            var path_customized = GetCustomizedPath(path_src);
+            var variant_customized = CreateVariant(variant_temp, path_customized);
+
+            Debug.Log("生成定制变体成功 : " + path_customized);
+        }
 
         /// <summary>
         /// 创建变体
@@ -102,7 +132,7 @@ namespace CustomizedVariant
         /// <param name="pref">预制体</param>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static GameObject CreateVariant(GameObject pref, string path)
+        private static GameObject CreateVariant(GameObject pref, string path)
         {
             var t = typeof(PrefabUtility);
             var method = t.GetMethod("CreateVariant", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
@@ -135,6 +165,10 @@ namespace CustomizedVariant
         /// <param name="path_customized">定制预制体变体路径</param>
         public static void ApplyTempModifications(string path_customized)
         {
+            if (IsVaild() == false)
+            {
+                return;
+            }
             var pref_temp = AssetDatabase.LoadAssetAtPath<GameObject>(GetTempPath(path_customized));
             if (pref_temp == null)
             {
@@ -310,6 +344,10 @@ namespace CustomizedVariant
         /// <param name="path_customized"></param>
         public static void RevertTempModifications(string path_customized)
         {
+            if (IsVaild() == false)
+            {
+                return;
+            }
             var pref_temp = AssetDatabase.LoadAssetAtPath<GameObject>(GetTempPath(path_customized));
             if (pref_temp == null)
             {
@@ -339,6 +377,10 @@ namespace CustomizedVariant
         /// <param name="path_customized"></param>
         public static void CorrectCustomizedModifications(string path_customized)
         {
+            if (IsVaild() == false)
+            {
+                return;
+            }
             var pref_customized = AssetDatabase.LoadAssetAtPath<GameObject>(path_customized);
             if (pref_customized == null)
             {
@@ -371,6 +413,10 @@ namespace CustomizedVariant
         /// <param name="path_customized"></param>
         public static void UnpackCustomizedVariant(string path_customized)
         {
+            if (IsVaild() == false)
+            {
+                return;
+            }
             var customized = AssetDatabase.LoadAssetAtPath<GameObject>(path_customized);
             GameObject instance = PrefabUtility.InstantiatePrefab(customized) as GameObject;
             PrefabUtility.UnpackPrefabInstance(instance, PrefabUnpackMode.Completely, InteractionMode.UserAction);

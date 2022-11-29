@@ -77,45 +77,5 @@ namespace CustomizedVariant
             return true;
         }
 
-        #region 工具方法
-        [MenuItem("Assets/定制化变体/创建定制预制体变体")]
-        public static void CreateCustomizedVariantPrefab()
-        {
-            var objs = Selection.gameObjects;
-            if (objs == null)
-            {
-                return;
-            }
-            foreach (var go in objs)
-            {
-                if (go == null)
-                {
-                    continue;
-                }
-                var path_src = AssetDatabase.GetAssetPath(go);
-                // 创建temp变体，用于应用子嵌套预设的变体修改信息
-                var path_temp = VariantUtility.GetTempPath(path_src);
-                var variant_temp = VariantUtility.CreateVariant(go, path_temp);
-                // 创建customized变体，用于保存此预设的变体修改信息
-                var path_customized = VariantUtility.GetCustomizedPath(path_src);
-                var variant_customized = VariantUtility.CreateVariant(variant_temp, path_customized);
-
-                Debug.Log("生成定制变体成功 : " + path_customized);
-            }
-        }
-
-        [MenuItem("Assets/定制化变体/重置定制预制体变体名Tag")]
-        public static void ResetCustomizedVariantTag()
-        {
-            VariantUtility.VariantTag = "";
-            PrintCustomizedVariantTag();
-        }
-
-        [MenuItem("Assets/定制化变体/输出定制预制体变体名Tag")]
-        public static void PrintCustomizedVariantTag()
-        {
-            Debug.LogFormat("当前预制体变体名Tag为 ： {0}", VariantUtility.VariantTag);
-        }
-        #endregion
     }
 }
