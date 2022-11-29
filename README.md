@@ -71,7 +71,7 @@
     - 将所有变更属性应用并保存
 
 ## 效果展示
-![Compare_Redpoint.png](/img/Unity/CustomizedVariant/Compare_Redpoint.png?raw=true)
+![Compare_RedPoint.png](/img/Unity/CustomizedVariant/Compare_Redpoint.png?raw=true)
 ![Compare_Item_A.png](/img/Unity/CustomizedVariant/Compare_Item_A.png?raw=true)
 ![Compare_Panel_A.png](/img/Unity/CustomizedVariant/Compare_Panel_A.png?raw=true)
 
